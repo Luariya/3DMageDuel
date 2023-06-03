@@ -11,7 +11,7 @@ public class HealthManager : MonoBehaviour
     private int currentHearts2;
     public GameObject gameOverScreen;
     public GameObject victoryScreen;
-    public GameObject Heart1;
+
     private void Start()
     {
         currentHearts = maxHearts;

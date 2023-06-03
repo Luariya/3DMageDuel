@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Walking : MonoBehaviour
 {
-    [SerializeField] float MovementSpeed = 100f;
-    [SerializeField] float GroundDrag = 5f;
+    [SerializeField] float MovementSpeed = 10f;
+    [SerializeField] float AirMovement = 0.5f;
     [SerializeField] Transform Orientation;
     [SerializeField] LayerMask GroundMask;
     [SerializeField] Camera Camera;
@@ -26,16 +26,11 @@ public class Walking : MonoBehaviour
 
     private void Update()
     {
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, GroundDistance, GroundMask);
+
         Movement();
 
-        if (isGrounded )
-        {
-            rb.drag = GroundDrag;
-        }
-        else
-        {
-            rb.drag = 0f;
-        }
+        SpeedLimiter();
     }
 
     private void FixedUpdate()
@@ -43,8 +38,6 @@ public class Walking : MonoBehaviour
         MoveToDirection();
 
         RotateToDirection();
-
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, GroundDistance, GroundMask);
     }
 
     void Movement()
@@ -57,7 +50,15 @@ public class Walking : MonoBehaviour
     {
         Direction = Orientation.forward * movementForward + Orientation.right * movementSide;
 
-        rb.AddForce(Direction.normalized * MovementSpeed, ForceMode.Force);
+        if (isGrounded)
+        {
+            rb.AddForce(Direction.normalized * MovementSpeed, ForceMode.Force);
+        }
+
+        if (!isGrounded)
+        {
+            rb.AddForce(Direction.normalized * MovementSpeed * AirMovement, ForceMode.Force);
+        }
     }
 
     private void RotateToDirection()
@@ -65,4 +66,14 @@ public class Walking : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(-Camera.transform.forward, Camera.transform.up);
     }
 
+    private void SpeedLimiter()
+    {
+        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        if (flatVel.magnitude > MovementSpeed)
+        {
+            Vector3 limitedVel = flatVel.normalized * MovementSpeed;
+            rb.velocity = limitedVel = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
 }

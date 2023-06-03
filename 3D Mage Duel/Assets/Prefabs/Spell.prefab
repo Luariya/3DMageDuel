@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1167e56c44dfa9c47a1b14c1df67c553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpellSpeed: 30
+  SpellSpeed: 50
   Orientation: {fileID: 0}
 --- !u!114 &-3169723408558710912
 MonoBehaviour:

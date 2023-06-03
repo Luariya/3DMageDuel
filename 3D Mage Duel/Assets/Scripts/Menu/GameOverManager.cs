@@ -19,6 +19,7 @@ public class GameOverManager : MonoBehaviour
         {
             isGameOver = true;
             gameOverScreen.SetActive(true);
+            Time.timeScale = 0;
 
         }
     }
@@ -28,6 +29,7 @@ public class GameOverManager : MonoBehaviour
         {
             isGameWon = true;
             victoryScreen.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 }
