@@ -6,6 +6,8 @@ public class SpellController : MonoBehaviour
 {
     public SpellBehaviour SpellPrefab;
     public Transform SpellOffset;
+    private float SpellCooldown;
+
 
     private void Update()
     {

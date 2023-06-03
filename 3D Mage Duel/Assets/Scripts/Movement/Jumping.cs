@@ -33,7 +33,7 @@ public class Jumping : MonoBehaviour
         { 
             rb.velocity = Vector3.zero;
 
-            rb.AddForce(new Vector3(0, Jumpforce, 0), ForceMode.Impulse);
+            rb.AddForce(new Vector3(rb.velocity.x, Jumpforce, rb.velocity.z), ForceMode.Impulse);
         }
     }
 }
