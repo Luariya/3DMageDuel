@@ -4,27 +4,30 @@ using Photon.Realtime;
 
 public class PlayerManager : MonoBehaviourPunCallbacks
 {
-    public GameObject playerPrefab;
+    public GameObject playerPrefab1; // Prefab for player 1 character
+    public GameObject playerPrefab2; // Prefab for player 2 character
 
     private void Start()
     {
-        if (PhotonNetwork.IsConnected)
+        if (PhotonNetwork.IsConnectedAndReady)
         {
-            PhotonNetwork.Instantiate(playerPrefab.name, Vector3.zero, Quaternion.identity);
-        }
-        else
-        {
-            Debug.LogError("Not connected to Photon server.");
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+            {
+                // Instantiate the player character for player 1
+                PhotonNetwork.Instantiate(playerPrefab1.name, Vector3.zero, Quaternion.identity);
+            }
         }
     }
 
-    public override void OnJoinedRoom()
+    public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        if (PhotonNetwork.IsConnectedAndReady && PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
-            // Both players have joined the room
-            Debug.Log("Both players have joined the room.");
-            // Implement any game logic or scene transitions here
+            if (newPlayer.IsLocal)
+            {
+                // Instantiate the player character for player 2
+                PhotonNetwork.Instantiate(playerPrefab2.name, Vector3.zero, Quaternion.identity);
+            }
         }
     }
 }
