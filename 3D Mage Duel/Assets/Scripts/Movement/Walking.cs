@@ -5,7 +5,7 @@ using UnityEngine;
 public class Walking : MonoBehaviour
 {
     [SerializeField] float MovementSpeed = 100f;
-    [SerializeField] float GroundDrag = 1f;
+    [SerializeField] float GroundDrag = 5f;
     [SerializeField] Transform Orientation;
     [SerializeField] LayerMask GroundMask;
     [SerializeField] Camera Camera;
