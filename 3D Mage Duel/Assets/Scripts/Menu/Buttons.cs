@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Buttons : MonoBehaviour
 {
+    public GameObject Credits;
+    public GameObject Settings;
     public void QuitButton()
     {
         Debug.Log("Quit");
@@ -16,5 +18,14 @@ public class Buttons : MonoBehaviour
         SceneManager.LoadScene("StartScreen");
     }
 
+    public void CreditScreen()
+    {
+        Credits.SetActive(true);
+    }
+
+    public void SettingsScreen()
+    {
+        Settings.SetActive(true);
+    }
 }
 
