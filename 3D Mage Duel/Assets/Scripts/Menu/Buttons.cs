@@ -43,5 +43,12 @@ public class Buttons : MonoBehaviour
         Credits.SetActive(false);
         Settings.SetActive(false);
     }
+    public void StartButton()
+    {
+        buttonsound.Play();
+        SceneManager.LoadScene("Lobby");
+
+    }
 }
+
 
