@@ -8,6 +8,7 @@ public class Walking : MonoBehaviour
     [SerializeField] float GroundDrag = 1f;
     [SerializeField] Transform Orientation;
     [SerializeField] LayerMask GroundMask;
+    [SerializeField] Camera Camera;
     Rigidbody rb;
 
     private float movementForward;
@@ -21,7 +22,6 @@ public class Walking : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
     }
 
     private void Update()
@@ -42,6 +42,8 @@ public class Walking : MonoBehaviour
     {
         MoveToDirection();
 
+        RotateToDirection();
+
         isGrounded = Physics.Raycast(transform.position, Vector3.down, GroundDistance, GroundMask);
     }
 
@@ -56,6 +58,11 @@ public class Walking : MonoBehaviour
         Direction = Orientation.forward * movementForward + Orientation.right * movementSide;
 
         rb.AddForce(Direction.normalized * MovementSpeed, ForceMode.Force);
+    }
+
+    private void RotateToDirection()
+    {
+        transform.rotation = Quaternion.LookRotation(-Camera.transform.forward, Camera.transform.up);
     }
 
 }
