@@ -18,7 +18,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void Play()
     {
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 2 });
+        if (PhotonNetwork.IsConnected)
+        {
+            RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
+            PhotonNetwork.JoinOrCreateRoom("MyRoom", roomOptions, TypedLobby.Default);
+        }
+        else
+        {
+            Debug.Log("Not connected to Photon Network");
+        }
     }
 
     public void LeaveRoomAndLoadScene()
