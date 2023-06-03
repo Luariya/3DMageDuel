@@ -5,6 +5,8 @@ using UnityEngine.XR;
 
 public class PlayerCamera : MonoBehaviour
 {
+    [SerializeField] GameObject Screen;
+
     private float MouseX = 100f;
     private float MouseY = 100f;
 
@@ -13,14 +15,19 @@ public class PlayerCamera : MonoBehaviour
     private float yRotation;
     private float xRotation;
 
-    private void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     private void Update()
     {
+        if (Screen != null && !Screen.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         Camera();
     }
 
