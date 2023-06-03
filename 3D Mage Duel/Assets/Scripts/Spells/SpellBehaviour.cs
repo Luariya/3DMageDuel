@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class SpellBehaviour : MonoBehaviour
 {
-    [SerializeField] float SpellSpeed = 5f;
+    [SerializeField] float SpellSpeed = 30f;
+    [SerializeField] Transform Orientation;
     Rigidbody rb;
 
     private void Awake()

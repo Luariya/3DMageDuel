@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Jumping : MonoBehaviour
 {
-    [SerializeField] float Jumpforce = 5f;
+    [SerializeField] float Jumpforce = 10f;
     [SerializeField] float GroundDistance = 1f;
     Rigidbody rb;
     public LayerMask GroundMask;
