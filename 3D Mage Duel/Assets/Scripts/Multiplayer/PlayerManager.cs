@@ -1,9 +1,9 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerManager : MonoBehaviourPun
+public class PlayerManager : MonoBehaviourPunCallbacks
 {
-    public GameObject playerPrefab;
+    public GameObject playerPrefab; // Reference to the player prefab in the scene
 
     private void Start()
     {
@@ -15,11 +15,6 @@ public class PlayerManager : MonoBehaviourPun
                 // Instantiate the player prefab and enable it
                 GameObject playerObj = PhotonNetwork.Instantiate(playerPrefab.name, transform.position, transform.rotation);
                 playerObj.SetActive(true);
-            }
-            else
-            {
-                // Disable the PlayerManager script for remote players
-                enabled = false;
             }
         }
     }
