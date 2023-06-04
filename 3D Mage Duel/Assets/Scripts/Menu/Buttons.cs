@@ -47,7 +47,7 @@ public class Buttons : MonoBehaviour
     public void StartButton()
     {
         buttonsound.Play();
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("Loading");
 
     }
 }

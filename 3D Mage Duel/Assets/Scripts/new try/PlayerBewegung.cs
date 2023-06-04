@@ -1,4 +1,8 @@
 using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+using Photon.Pun;
+
 
 public class PlayerBewegung : MonoBehaviour
 {
@@ -10,52 +14,59 @@ public class PlayerBewegung : MonoBehaviour
     private CharacterController characterController;
     private float verticalVelocity;
 
+    PhotonView view; 
+
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
+        view = GetComponent<PhotonView>();
     }
 
     private void Update()
     {
-        // Rotation
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        transform.Rotate(Vector3.up, mouseX);
-
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-        float newCameraRotationX = cameraTransform.localEulerAngles.x - mouseY;
-
-        if (newCameraRotationX > 180f)
-            newCameraRotationX -= 360f;
-
-        newCameraRotationX = Mathf.Clamp(newCameraRotationX, -90f, 90f);
-
-        cameraTransform.localEulerAngles = new Vector3(newCameraRotationX, 0f, 0f);
-
-        // Movement
-        float moveX = Input.GetAxis("Horizontal") * movementSpeed;
-        float moveZ = Input.GetAxis("Vertical") * movementSpeed;
-
-        Vector3 movement = transform.right * moveX + transform.forward * moveZ;
-
-        // Apply gravity
-        if (!characterController.isGrounded)
+        if (view.IsMine)
         {
-            verticalVelocity += Physics.gravity.y * Time.deltaTime;
-        }
-        else
-        {
-            // Reset vertical velocity when grounded
-            verticalVelocity = -0.5f;
+            // Rotation
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+            transform.Rotate(Vector3.up, mouseX);
 
-            // Jumping
-            if (Input.GetButtonDown("Jump"))
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+            float newCameraRotationX = cameraTransform.localEulerAngles.x - mouseY;
+
+            if (newCameraRotationX > 180f)
+                newCameraRotationX -= 360f;
+
+            newCameraRotationX = Mathf.Clamp(newCameraRotationX, -90f, 90f);
+
+            cameraTransform.localEulerAngles = new Vector3(newCameraRotationX, 0f, 0f);
+
+            // Movement
+            float moveX = Input.GetAxis("Horizontal") * movementSpeed;
+            float moveZ = Input.GetAxis("Vertical") * movementSpeed;
+
+            Vector3 movement = transform.right * moveX + transform.forward * moveZ;
+
+            // Apply gravity
+            if (!characterController.isGrounded)
             {
-                verticalVelocity = jumpForce;
+                verticalVelocity += Physics.gravity.y * Time.deltaTime;
             }
-        }
+            else
+            {
+                // Reset vertical velocity when grounded
+                verticalVelocity = -0.5f;
 
-        movement.y = verticalVelocity;
-        characterController.Move(movement * Time.deltaTime);
+                // Jumping
+                if (Input.GetButtonDown("Jump"))
+                {
+                    verticalVelocity = jumpForce;
+                }
+            }
+
+            movement.y = verticalVelocity;
+            characterController.Move(movement * Time.deltaTime);
+        }
     }
+      
 }
