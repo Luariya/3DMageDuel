@@ -12,7 +12,8 @@ public class PlayerManager : MonoBehaviourPunCallbacks
             if (photonView.IsMine)
             {
                 GameObject playerObj = PhotonNetwork.Instantiate(playerPrefab.name, transform.position, transform.rotation);
-                playerObj.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
+                PlayerMovement playerMovement = playerObj.GetComponent<PlayerMovement>();
+                playerMovement.SetupPlayer(photonView.Owner);
             }
         }
     }

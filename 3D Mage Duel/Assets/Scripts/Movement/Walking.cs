@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Walking : MonoBehaviour
+public class Walking : MonoBehaviourPunCallbacks
 {
     [SerializeField] float MovementSpeed = 10f;
     [SerializeField] float AirMovement = 0.5f;
     [SerializeField] Transform Orientation;
     [SerializeField] LayerMask GroundMask;
     [SerializeField] Camera Camera;
-    Rigidbody rb;
+    private PhotonView photonView;
 
     private float movementForward;
     private float movementSide;
@@ -17,10 +19,12 @@ public class Walking : MonoBehaviour
     private bool isGrounded;
     private float GroundDistance = 5f;
 
+    private Rigidbody rb;
     Vector3 Direction;
 
     private void Awake()
     {
+        photonView = GetComponent<PhotonView>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -29,15 +33,16 @@ public class Walking : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position, Vector3.down, GroundDistance, GroundMask);
 
         Movement();
-
-        SpeedLimiter();
     }
 
     private void FixedUpdate()
     {
-        MoveToDirection();
-
-        RotateToDirection();
+        if (photonView.IsMine)
+        {
+            MoveToDirection();
+            RotateToDirection();
+            SpeedLimiter();
+        }
     }
 
     void Movement()
