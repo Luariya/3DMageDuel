@@ -1,11 +1,13 @@
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Jumping : MonoBehaviour
+public class Jumping : MonoBehaviourPunCallbacks
 {
     [SerializeField] float Jumpforce = 5f;
     [SerializeField] float GroundDistance = 1f;
@@ -16,14 +18,17 @@ public class Jumping : MonoBehaviour
 
     private string deviceIdentifier;
 
+    private PhotonView photonView;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        photonView = GetComponent<PhotonView>();
     }
 
     private void Start()
     {
-        if (photonView.IsMine) 
+        if (photonView.IsMine)
         {
             deviceIdentifier = PhotonNetwork.LocalPlayer.UserId;
         }
@@ -31,20 +36,20 @@ public class Jumping : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = Physics.Raycast(transform.position, new Vector3(0, -1, 0), GroundDistance, GroundMask);
-
-        Jump();
-
         if (!photonView.IsMine)
         {
             return;
         }
+
+        isGrounded = Physics.Raycast(transform.position, new Vector3(0, -1, 0), GroundDistance, GroundMask);
+
+        Jump();
     }
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) 
-        { 
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
             rb.AddForce(new Vector3(rb.velocity.x, Jumpforce, rb.velocity.z), ForceMode.Impulse);
         }
     }
