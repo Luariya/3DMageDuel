@@ -8,6 +8,7 @@ public class Buttons : MonoBehaviour
     public GameObject Credits;
     public GameObject Settings;
     public AudioSource buttonsound;
+
     public void QuitButton()
     {
         buttonsound.Play();
@@ -46,7 +47,7 @@ public class Buttons : MonoBehaviour
     public void StartButton()
     {
         buttonsound.Play();
-        SceneManager.LoadScene("Lobby");
+        SceneManager.LoadScene("MainScene");
 
     }
 }
