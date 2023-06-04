@@ -2468,7 +2468,7 @@ MonoBehaviour:
   jumpForce: 5
   mouseSensitivity: 2
   cameraTransform: {fileID: 8661550414262550632}
-  cameraObject: {fileID: 0}
+  cameraObject: {fileID: 3695950146151672015}
 --- !u!143 &7849561465014051993
 CharacterController:
   m_ObjectHideFlags: 0

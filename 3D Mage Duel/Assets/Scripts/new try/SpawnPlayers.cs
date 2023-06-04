@@ -8,13 +8,12 @@ public class SpawnPlayers : MonoBehaviour
     public GameObject playerPrefab;
     public Transform spawnPosition;
 
-
-
     private void Start()
     {
-        
-        PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition.position, Quaternion.identity);
+        if (PhotonNetwork.IsConnectedAndReady)
+        {
+            // Instantiate the player prefab with ownership
+            PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition.position, Quaternion.identity, 0);
+        }
     }
-
-
 }
