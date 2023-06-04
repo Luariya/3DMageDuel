@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab0787d8d01b7747a444527e5da510c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpellPrefab: {fileID: 7362831100706664369, guid: fc1cfc9c39baa014585e50a22530f594, type: 3}
+  SpellPrefab: {fileID: 7357465114128166284, guid: 5d98123cefe57fe4ea1e1a1e5c71565b, type: 3}
   SpellOffset: {fileID: 2029304831327893679}
 --- !u!114 &2903606854811931287
 MonoBehaviour:
