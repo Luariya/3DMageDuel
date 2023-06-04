@@ -2336,8 +2336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56d81b3700a83a4d8703fd55a62b3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab1: {fileID: 1448450984}
-  playerPrefab2: {fileID: 1266721028}
+  playerPrefab: {fileID: 0}
 --- !u!4 &1114040582
 Transform:
   m_ObjectHideFlags: 0
@@ -3369,6 +3368,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75052d8cb61ed46498f14aa9e52133bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1266721059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266721028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &1289703292
 GameObject:
   m_ObjectHideFlags: 0
@@ -3926,6 +3941,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1813525912}
+  - {fileID: 1813525931}
   sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3941,6 +3957,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75052d8cb61ed46498f14aa9e52133bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1813525931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448450984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 0
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &1820551444
 GameObject:
   m_ObjectHideFlags: 0
