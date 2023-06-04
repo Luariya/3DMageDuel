@@ -4,14 +4,13 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class Walking : MonoBehaviourPunCallbacks
+public class Walking : MonoBehaviourPunCallbacks, IPunObservable
 {
     [SerializeField] float MovementSpeed = 10f;
     [SerializeField] float AirMovement = 0.5f;
     [SerializeField] Transform Orientation;
     [SerializeField] LayerMask GroundMask;
     [SerializeField] Camera Camera;
-    private PhotonView photonView;
 
     private float movementForward;
     private float movementSide;
@@ -20,16 +19,31 @@ public class Walking : MonoBehaviourPunCallbacks
     private float GroundDistance = 5f;
 
     private Rigidbody rb;
-    Vector3 Direction;
+    private Vector3 networkPosition;
+    private Quaternion networkRotation;
 
     private void Awake()
     {
-        photonView = GetComponent<PhotonView>();
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        if (!photonView.IsMine)
+        {
+            rb.isKinematic = true;
+        }
     }
 
     private void Update()
     {
+        if (!photonView.IsMine)
+        {
+            transform.position = Vector3.Lerp(transform.position, networkPosition, Time.deltaTime * 8f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, networkRotation, Time.deltaTime * 8f);
+            return;
+        }
+
         isGrounded = Physics.Raycast(transform.position, Vector3.down, GroundDistance, GroundMask);
 
         Movement();
@@ -53,16 +67,16 @@ public class Walking : MonoBehaviourPunCallbacks
 
     private void MoveToDirection()
     {
-        Direction = Orientation.forward * movementForward + Orientation.right * movementSide;
+        Vector3 direction = Orientation.forward * movementForward + Orientation.right * movementSide;
 
         if (isGrounded)
         {
-            rb.AddForce(Direction.normalized * MovementSpeed, ForceMode.Force);
+            rb.AddForce(direction.normalized * MovementSpeed, ForceMode.Force);
         }
 
         if (!isGrounded)
         {
-            rb.AddForce(Direction.normalized * MovementSpeed * AirMovement, ForceMode.Force);
+            rb.AddForce(direction.normalized * MovementSpeed * AirMovement, ForceMode.Force);
         }
     }
 
@@ -79,6 +93,20 @@ public class Walking : MonoBehaviourPunCallbacks
         {
             Vector3 limitedVel = flatVel.normalized * MovementSpeed;
             rb.velocity = limitedVel = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+        }
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(transform.position);
+            stream.SendNext(transform.rotation);
+        }
+        else
+        {
+            networkPosition = (Vector3)stream.ReceiveNext();
+            networkRotation = (Quaternion)stream.ReceiveNext();
         }
     }
 }

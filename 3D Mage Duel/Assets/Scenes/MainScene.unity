@@ -2336,7 +2336,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56d81b3700a83a4d8703fd55a62b3e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
+  playerPrefab1: {fileID: 1448450984}
+  playerPrefab2: {fileID: 1266721028}
 --- !u!4 &1114040582
 Transform:
   m_ObjectHideFlags: 0
@@ -3393,9 +3394,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1266721028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a400f02dc29704d43b90291f45af2d2c, type: 3}
+  m_Script: {fileID: 11500000, guid: a0cc70e96330503479cb8801126439e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 10
+  jumpForce: 5
+  groundDistance: 1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
+  camera: {fileID: 0}
 --- !u!1 &1289703292
 GameObject:
   m_ObjectHideFlags: 0
@@ -3831,7 +3839,10 @@ PrefabInstance:
       propertyPath: gameOverScreen
       value: 
       objectReference: {fileID: 782628375}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6329258040764216081, guid: d2eaf2bd433527242b0a463c7b997637, type: 3}
+    - {fileID: 6329258040764216080, guid: d2eaf2bd433527242b0a463c7b997637, type: 3}
+    - {fileID: 6329258040764216082, guid: d2eaf2bd433527242b0a463c7b997637, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d2eaf2bd433527242b0a463c7b997637, type: 3}
 --- !u!1001 &1813525900
 PrefabInstance:
@@ -3908,7 +3919,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3774622261554981741, guid: ec62187430226f74e956ef7297247097, type: 3}
+    - {fileID: 3774622261554981740, guid: ec62187430226f74e956ef7297247097, type: 3}
+    - {fileID: 3774622261554981742, guid: ec62187430226f74e956ef7297247097, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: ec62187430226f74e956ef7297247097, type: 3}
 --- !u!4 &1813525901 stripped
 Transform:
@@ -3960,10 +3974,8 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 1813525927}
   - {fileID: 1813525912}
   - {fileID: 1813525931}
-  - {fileID: 1813525932}
   sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3977,17 +3989,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75052d8cb61ed46498f14aa9e52133bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1813525927 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3774622261554981740, guid: ec62187430226f74e956ef7297247097, type: 3}
-  m_PrefabInstance: {fileID: 1813525900}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448450984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0e18d621d011274ea56d5490ff30602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1813525931
@@ -4015,9 +4016,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1448450984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a400f02dc29704d43b90291f45af2d2c, type: 3}
+  m_Script: {fileID: 11500000, guid: a0cc70e96330503479cb8801126439e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementSpeed: 10
+  jumpForce: 5
+  groundDistance: 1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 128
+  camera: {fileID: 0}
 --- !u!1 &1820551444
 GameObject:
   m_ObjectHideFlags: 0
