@@ -3,6 +3,8 @@ using Photon.Pun;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    [SerializeField] private GameObject playerPrefab; // Reference to the player prefab
+
     private void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -15,11 +17,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        PhotonNetwork.CreateRoom(null, new Photon.Realtime.RoomOptions { MaxPlayers = 2 });
+        PhotonNetwork.CreateRoom(null, new Photon.Realtime.RoomOptions());
     }
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("MainScene");
+        PhotonNetwork.Instantiate(playerPrefab.name, Vector3.zero, Quaternion.identity);
     }
 }

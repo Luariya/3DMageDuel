@@ -1264,6 +1264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05e497c609076be47be68a51f31e20ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 0}
 --- !u!4 &2054747178
 Transform:
   m_ObjectHideFlags: 0
@@ -1293,3 +1294,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayers: 2
+  MainScene: NextScene

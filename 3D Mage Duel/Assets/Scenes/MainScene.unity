@@ -921,6 +921,7 @@ GameObject:
   m_Component:
   - component: {fileID: 287268712}
   - component: {fileID: 287268713}
+  - component: {fileID: 287268714}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -965,6 +966,19 @@ MonoBehaviour:
   sceneViewId: 3
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &287268714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287268710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05e497c609076be47be68a51f31e20ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 3774622262160531167}
 --- !u!43 &362079920
 Mesh:
   m_ObjectHideFlags: 0
@@ -2185,37 +2199,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!1 &1114040580
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1114040582}
-  m_Layer: 0
-  m_Name: PlayerManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1114040582
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1114040580}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 63, y: -1493.8644, z: -1548}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1132908743
 GameObject:
   m_ObjectHideFlags: 0
@@ -3634,6 +3617,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerPrefab1
       objectReference: {fileID: 0}
+    - target: {fileID: 3664842203448063434, guid: e51ed56eee374684e881c21a769acdb8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3664842203448063474, guid: e51ed56eee374684e881c21a769acdb8, type: 3}
       propertyPath: m_Constraints
       value: 112
@@ -3668,7 +3655,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3664842203448063478, guid: e51ed56eee374684e881c21a769acdb8, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3664842203448063478, guid: e51ed56eee374684e881c21a769acdb8, type: 3}
       propertyPath: m_LocalPosition.x
