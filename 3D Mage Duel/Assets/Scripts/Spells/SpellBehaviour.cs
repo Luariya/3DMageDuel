@@ -8,9 +8,13 @@ public class SpellBehaviour : MonoBehaviour
     [SerializeField] Transform Orientation;
     Rigidbody rb;
 
+    private float SpellGone = 2f;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        Invoke("SpellDestroy", SpellGone);
     }
 
     private void Update()
@@ -21,5 +25,10 @@ public class SpellBehaviour : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
+    }
+
+    void SpellDestroy()
+    {
+        Destroy(this.gameObject);
     }
 }
