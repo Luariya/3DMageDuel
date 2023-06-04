@@ -24,6 +24,8 @@ public class GameState : MonoBehaviourPunCallbacks
             victory = canvasGameObject.transform.Find("VictoryScreen").gameObject;
         }
     }
+    
+    [PunRPC]
 
     private void Update()
     {
@@ -50,7 +52,10 @@ public class GameState : MonoBehaviourPunCallbacks
     [PunRPC]
     public void SetGameOverRPC()
     {
-        isGameOver = true;
+        if (gameOver != null)
+        {
+            isGameOver = true;
+        }
     }
 
     public void SetGameOver()
