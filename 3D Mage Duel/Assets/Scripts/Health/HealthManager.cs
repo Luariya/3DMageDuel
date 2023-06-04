@@ -9,13 +9,20 @@ public class HealthManager : MonoBehaviour
     public int maxHearts = 3;
     private int currentHearts;
     private int currentHearts2;
-    public GameObject gameOverScreen;
-    public GameObject victoryScreen;
+    public GameObject gameOver;
+    public GameObject Victory;
 
     private void Start()
     {
         currentHearts = maxHearts;
         currentHearts2 = maxHearts;
+
+        GameObject canvasGameObject = GameObject.Find("Canvas");
+        if (canvasGameObject != null)
+        {
+            // Reference the GameObject in the Canvas
+            gameOver = canvasGameObject.transform.Find("gameOverScreen").gameObject;
+        }
     }
 
     public void DecreaseHearts()
@@ -40,6 +47,6 @@ public class HealthManager : MonoBehaviour
 
     private void GameOver()
     {
-        gameOverScreen.SetActive(true);
+        gameOver.SetActive(true);
     }
 }
