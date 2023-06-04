@@ -42,8 +42,8 @@ public class Walking : MonoBehaviour
 
     void Movement()
     {
-        movementForward = Input.GetAxis("Vertical") * MovementSpeed;
-        movementSide = Input.GetAxis("Horizontal") * MovementSpeed;
+        movementForward = Input.GetAxis("Vertical") * MovementSpeed * Time.fixedDeltaTime;
+        movementSide = Input.GetAxis("Horizontal") * MovementSpeed * Time.fixedDeltaTime;
     }
 
     private void MoveToDirection()

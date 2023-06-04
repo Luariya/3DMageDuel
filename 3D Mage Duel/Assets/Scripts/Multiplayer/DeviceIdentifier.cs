@@ -26,7 +26,11 @@ public class DeviceIdentifier : MonoBehaviour
 
     private void ProcessInput()
     {
-        // Process the input commands for the current device
-        // Your code here...
+        Input.GetAxis("Horizontal");
+        Input.GetAxis("Vertical");
+        Input.GetAxisRaw("Mouse X");
+        Input.GetAxisRaw("Mouse Y");
+        Input.GetButton("Fire1");
+        Input.GetKey(KeyCode.Space);
     }
 }
