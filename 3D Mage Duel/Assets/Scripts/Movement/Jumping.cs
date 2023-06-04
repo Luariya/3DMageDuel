@@ -1,3 +1,5 @@
+using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,9 +14,19 @@ public class Jumping : MonoBehaviour
 
     private bool isGrounded;
 
+    private string deviceIdentifier;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void Start()
+    {
+        if (photonView.IsMine) 
+        {
+            deviceIdentifier = PhotonNetwork.LocalPlayer.UserId;
+        }
     }
 
     private void Update()
@@ -22,6 +34,11 @@ public class Jumping : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position, new Vector3(0, -1, 0), GroundDistance, GroundMask);
 
         Jump();
+
+        if (!photonView.IsMine)
+        {
+            return;
+        }
     }
 
     void Jump()
