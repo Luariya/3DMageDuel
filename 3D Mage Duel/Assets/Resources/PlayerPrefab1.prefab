@@ -2468,6 +2468,7 @@ MonoBehaviour:
   jumpForce: 5
   mouseSensitivity: 2
   cameraTransform: {fileID: 8661550414262550632}
+  cameraObject: {fileID: 0}
 --- !u!143 &7849561465014051993
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2503,7 +2504,7 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 0
+  observableSearch: 2
   ObservedComponents:
   - {fileID: -1542097173207902974}
   sceneViewId: 0

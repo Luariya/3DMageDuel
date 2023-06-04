@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Realtime;
 
 
 public class PlayerBewegung : MonoBehaviour
@@ -13,20 +14,28 @@ public class PlayerBewegung : MonoBehaviour
 
     private CharacterController characterController;
     private float verticalVelocity;
+    public GameObject cameraObject;
 
-    PhotonView view; 
+    private PhotonView view;
+    
 
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         view = GetComponent<PhotonView>();
+        if (!view.IsMine)
+        {
+            // Disable the camera if this is not the local player
+            cameraObject.SetActive(false);
+        }
     }
 
     private void Update()
     {
         if (view.IsMine)
         {
+            Debug.Log("isMineWorking");
             // Rotation
             float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
             transform.Rotate(Vector3.up, mouseX);
@@ -44,6 +53,7 @@ public class PlayerBewegung : MonoBehaviour
             // Movement
             float moveX = Input.GetAxis("Horizontal") * movementSpeed;
             float moveZ = Input.GetAxis("Vertical") * movementSpeed;
+            Debug.Log("isMineWorkingStill");
 
             Vector3 movement = transform.right * moveX + transform.forward * moveZ;
 
@@ -66,6 +76,7 @@ public class PlayerBewegung : MonoBehaviour
 
             movement.y = verticalVelocity;
             characterController.Move(movement * Time.deltaTime);
+            Debug.Log("isMineworksfully");
         }
     }
       
