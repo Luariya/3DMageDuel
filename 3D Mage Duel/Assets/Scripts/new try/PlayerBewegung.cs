@@ -90,7 +90,7 @@ public class PlayerBewegung : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1") && SpellReady)
             {
-                Instantiate(SpellPrefab, SpellOffset.transform.position, SpellOffset.transform.rotation);
+                PhotonNetwork.Instantiate(SpellPrefab.name, SpellOffset.transform.position, SpellOffset.transform.rotation);
 
                 Invoke("SpellTimer", SpellCooldown);
             }

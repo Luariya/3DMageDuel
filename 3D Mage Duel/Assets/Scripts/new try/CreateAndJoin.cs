@@ -26,7 +26,7 @@ public class CreateAndJoin : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         // Instantiate the player prefab
-        GameObject player = PhotonNetwork.Instantiate("PlayerPrefab", Vector3.zero, Quaternion.identity);
+        GameObject player = PhotonNetwork.Instantiate("PlayerPrefab1", Vector3.zero, Quaternion.identity);
 
         // Set the tag of the player prefab
         player.tag = PlayerTag;
