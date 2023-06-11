@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class SpellBehaviour : MonoBehaviour
+public class SpellBehaviour : MonoBehaviourPunCallbacks
 {
     [SerializeField] float SpellSpeed = 50f;
     [SerializeField] Transform Orientation;
@@ -17,18 +16,47 @@ public class SpellBehaviour : MonoBehaviour
         Invoke("SpellDestroy", SpellGone);
     }
 
+    [PunRPC]
     private void Update()
     {
-        transform.position += transform.forward * Time.deltaTime * SpellSpeed;
+            transform.position += transform.forward * Time.deltaTime * SpellSpeed;      
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (photonView.IsMine)
+        {
+            // Destroy the spell locally
+            Destroy(gameObject);
+
+            // Send collision RPC to other players
+            photonView.RPC("SyncCollision", RpcTarget.Others);
+        }
+    }
+
+    [PunRPC]
+    private void SyncCollision()
+    {
+        // Process collision on other players
         Destroy(gameObject);
     }
 
     void SpellDestroy()
     {
-        Destroy(this.gameObject);
+        if (photonView.IsMine)
+        {
+            // Destroy the spell locally
+            Destroy(this.gameObject);
+
+            // Send destruction RPC to other players
+            photonView.RPC("SyncSpellDestroy", RpcTarget.Others);
+        }
+    }
+
+    [PunRPC]
+    private void SyncSpellDestroy()
+    {
+        // Process destruction on other players
+        Destroy(gameObject);
     }
 }

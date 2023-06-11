@@ -13,12 +13,13 @@ public class Damage : MonoBehaviour
         healthManager = FindObjectOfType<HealthManager>();
     }
 
-    private void OnTriggerEnter(Collider other)
+ /*   private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player1"))
         {
             healthManager.DecreaseHearts();
+            healthManager.DestroyHearts( 1);
             Debug.Log("-1 Heart");
         }
-    }
+    } */
 }

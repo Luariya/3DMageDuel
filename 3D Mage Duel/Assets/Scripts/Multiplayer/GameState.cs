@@ -5,7 +5,7 @@ using Photon.Realtime;
 
 public class GameState : MonoBehaviourPunCallbacks
 {
-    public GameObject victory;
+  /*  public GameObject victory;
     public GameObject gameOver;
     private PhotonView view;
 
@@ -49,5 +49,5 @@ public class GameState : MonoBehaviourPunCallbacks
     public void SetGameOver()
     {
         photonView.RPC("SetGameOverRPC", RpcTarget.All);
-    }
+    } */
 }

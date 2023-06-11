@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class HealthManager : MonoBehaviour
+public class HealthManager : MonoBehaviourPunCallbacks
 {
     public int maxHearts = 3;
     private int currentHearts;
@@ -16,11 +17,16 @@ public class HealthManager : MonoBehaviour
     private GameObject Heart2;
     private GameObject Heart3;
 
+    private bool initialized;
+
+    PhotonView view;
+
     private void Start()
     {
-        currentHearts = maxHearts;
 
         gameState = FindObjectOfType<GameState>();
+
+        view = GetComponent<PhotonView>();
 
         GameObject canvasGameObject = GameObject.Find("Canvas");
         if (canvasGameObject != null)
@@ -28,34 +34,93 @@ public class HealthManager : MonoBehaviour
             gameOver = canvasGameObject.transform.Find("gameOverScreen").gameObject;
             Victory = canvasGameObject.transform.Find("VictoryScreen").gameObject;
         }
+        InitializeHearts();
 
-        Heart1 = gameObject.transform.Find("Heart 1").gameObject;
-        Heart2 = gameObject.transform.Find("Heart 2").gameObject;
-        Heart3 = gameObject.transform.Find("Heart 3").gameObject;
+        if (view.IsMine)
+        {
+            currentHearts = maxHearts;
+        }
     }
 
+    private void InitializeHearts()
+    {
+        if (!photonView.IsMine)
+            return;
+
+        initialized = true;
+
+        GameObject Player = this.gameObject;
+
+        Heart1 = this.transform.Find("Canvas/Heart 1").gameObject;
+        Heart2 = this.transform.Find("Canvas/Heart 2").gameObject;
+        Heart3 = this.transform.Find("Canvas/Heart 3").gameObject;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (photonView.IsMine)
+        {
+            if (collision.gameObject.CompareTag("Projectile"))
+            {
+                photonView.RPC("DecreaseHearts", RpcTarget.All);
+            }
+        }
+    }
+
+    private void Update()
+    {      
+            if (!initialized && photonView.IsMine)
+            {
+                InitializeHearts();
+            }      
+
+        if (view.IsMine)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                Destroy(Heart3);
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                Destroy(Heart2);
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                Destroy(Heart1);
+            }
+        }
+
+        DestroyHearts();
+    }
+
+    [PunRPC]
+    public void DestroyHearts()
+    {
+        if (currentHearts < 3)
+        {
+            Destroy(Heart3);
+        }
+        if (currentHearts < 2)
+        {
+            Destroy(Heart2);
+        }        
+        if (currentHearts < 1)
+        {
+            Destroy(Heart1);
+        }        
+    }
+
+    [PunRPC]
     public void DecreaseHearts()
     {
         currentHearts--;
 
-        if (currentHearts == 2) 
-        { 
-            Heart3?.SetActive(false);
-        }
-        else if (currentHearts == 1)
+        if (view.IsMine)
         {
-            Heart2?.SetActive(false);
-        }
-        else if(currentHearts == 0)
-        {
-            Heart1?.SetActive(false);
-        }
-
-
-        if (currentHearts <= 0)
-        {
-            GameOver();
-            gameState.SetGameOverRPC();
+            if (currentHearts < 0)
+            {
+                GameOver();
+            }
         }
     }
 

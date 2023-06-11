@@ -100,7 +100,7 @@ public class PlayerBewegung : MonoBehaviour
                Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
-            else
+            else if (Input.GetKeyDown(KeyCode.Space) && Cursor.visible)
             {
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
