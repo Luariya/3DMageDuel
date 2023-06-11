@@ -34,49 +34,23 @@ public class HealthManager : MonoBehaviour
         Heart3 = gameObject.transform.Find("Heart 3").gameObject;
     }
 
-    private void Update()
-    {
-        switch (currentHearts)
-        {
-            case 0:
-                {
-                    Heart1.gameObject.SetActive(false);
-                    Heart2.gameObject.SetActive(false);
-                    Heart3.gameObject.SetActive(false);
-                    Debug.Log("0");
-                    break;
-                }
-            case 1:
-                {
-                    Heart1.gameObject.SetActive(true);
-                    Heart2.gameObject.SetActive(false);
-                    Heart3.gameObject.SetActive(false);
-                    Debug.Log("1");
-                    break;
-
-                }
-            case 2:
-                {
-                    Heart1.gameObject.SetActive(true);
-                    Heart2.gameObject.SetActive(true);
-                    Heart3.gameObject.SetActive(false);
-                    Debug.Log("2");
-                    break;
-                }
-            case 3:
-                {
-                    Heart1.gameObject.SetActive(true);
-                    Heart2.gameObject.SetActive(true);
-                    Heart3.gameObject.SetActive(true);
-                    Debug.Log("3");
-                    break;
-                }
-        }
-    }
-
     public void DecreaseHearts()
     {
         currentHearts--;
+
+        if (currentHearts == 2) 
+        { 
+            Heart3?.SetActive(false);
+        }
+        else if (currentHearts == 1)
+        {
+            Heart2?.SetActive(false);
+        }
+        else if(currentHearts == 0)
+        {
+            Heart1?.SetActive(false);
+        }
+
 
         if (currentHearts <= 0)
         {
