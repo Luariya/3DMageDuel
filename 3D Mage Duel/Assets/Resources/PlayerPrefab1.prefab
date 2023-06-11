@@ -1349,6 +1349,7 @@ GameObject:
   - component: {fileID: 957649434357452712}
   - component: {fileID: 957649434357452718}
   - component: {fileID: 957649434357452719}
+  - component: {fileID: 4820549234956888764}
   m_Layer: 5
   m_Name: Heart 1
   m_TagString: Untagged
@@ -1411,6 +1412,28 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &4820549234956888764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957649434357452713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &957649434379712249
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,7 +2147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &957649434896010430
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2197,7 +2220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &957649435169324745
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3499,7 +3522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be4147074f328e247a63e274a2f5210b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHearts: 3
+  maxHearts: 1
   gameOver: {fileID: 0}
   Victory: {fileID: 0}
 --- !u!1 &3814208351108658241

@@ -3,7 +3,7 @@ using Photon.Pun;
 
 public class SpellBehaviour : MonoBehaviourPunCallbacks
 {
-    [SerializeField] float SpellSpeed = 50f;
+    [SerializeField] float SpellSpeed = 30f;
     [SerializeField] Transform Orientation;
     Rigidbody rb;
 

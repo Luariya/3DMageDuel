@@ -7,15 +7,12 @@ using Photon.Pun;
 
 public class HealthManager : MonoBehaviourPunCallbacks
 {
-    public int maxHearts = 3;
+    public int maxHearts = 1;
     private int currentHearts;
     public GameObject gameOver;
     public GameObject Victory;
-    private GameState gameState;
 
     private GameObject Heart1;
-    private GameObject Heart2;
-    private GameObject Heart3;
 
     private bool initialized;
 
@@ -23,9 +20,6 @@ public class HealthManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-
-        gameState = FindObjectOfType<GameState>();
-
         view = GetComponent<PhotonView>();
 
         GameObject canvasGameObject = GameObject.Find("Canvas");
@@ -52,8 +46,6 @@ public class HealthManager : MonoBehaviourPunCallbacks
         GameObject Player = this.gameObject;
 
         Heart1 = this.transform.Find("Canvas/Heart 1").gameObject;
-        Heart2 = this.transform.Find("Canvas/Heart 2").gameObject;
-        Heart3 = this.transform.Find("Canvas/Heart 3").gameObject;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -76,14 +68,6 @@ public class HealthManager : MonoBehaviourPunCallbacks
 
         if (view.IsMine)
         {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                Destroy(Heart3);
-            }
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Destroy(Heart2);
-            }
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 Destroy(Heart1);
@@ -96,14 +80,6 @@ public class HealthManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void DestroyHearts()
     {
-        if (currentHearts < 3)
-        {
-            Destroy(Heart3);
-        }
-        if (currentHearts < 2)
-        {
-            Destroy(Heart2);
-        }        
         if (currentHearts < 1)
         {
             Destroy(Heart1);
@@ -117,9 +93,16 @@ public class HealthManager : MonoBehaviourPunCallbacks
 
         if (view.IsMine)
         {
-            if (currentHearts < 0)
+            if (currentHearts <= 0)
             {
                 GameOver();
+            }
+        }
+        if (!view.IsMine)
+        {
+            if (currentHearts <= 0)
+            {
+                Win();
             }
         }
     }
@@ -127,5 +110,12 @@ public class HealthManager : MonoBehaviourPunCallbacks
     private void GameOver()
     {
         gameOver.SetActive(true);
+       PhotonNetwork.Destroy(Heart1);
+    }
+
+    private void Win()
+    {
+        Victory.SetActive(true);
+        PhotonNetwork.Destroy(Heart1);
     }
 }
