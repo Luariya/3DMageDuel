@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class Damage : MonoBehaviour
 {
@@ -16,11 +18,6 @@ public class Damage : MonoBehaviour
         if (other.CompareTag("Player1"))
         {
             healthManager.DecreaseHearts();
-            Debug.Log("-1 Heart");
-        }
-        if (other.CompareTag("Player2"))
-        {
-            healthManager.DecreaseHearts2();
             Debug.Log("-1 Heart");
         }
     }

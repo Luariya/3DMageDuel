@@ -18,6 +18,14 @@ public class PlayerBewegung : MonoBehaviour
 
     private PhotonView view;
     
+    private HealthManager healthManager;
+
+    public SpellBehaviour SpellPrefab;
+    public Transform SpellOffset;
+    private float SpellCooldown = 0.1f;
+    private float SpellCooldown2 = 0.3f;
+
+    private bool SpellReady = true;
 
     private void Start()
     {
@@ -29,6 +37,8 @@ public class PlayerBewegung : MonoBehaviour
             // Disable the camera if this is not the local player
             cameraObject.SetActive(false);
         }
+
+        healthManager = FindObjectOfType<HealthManager>();
     }
 
     private void Update()
@@ -77,7 +87,49 @@ public class PlayerBewegung : MonoBehaviour
             movement.y = verticalVelocity;
             characterController.Move(movement * Time.deltaTime);
             Debug.Log("isMineworksfully");
+
+            if (Input.GetButtonDown("Fire1") && SpellReady)
+            {
+                Instantiate(SpellPrefab, SpellOffset.transform.position, SpellOffset.transform.rotation);
+
+                Invoke("SpellTimer", SpellCooldown);
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+               Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+        }
+    }    
+
+    void CursorState()
+    {
+        if (healthManager.gameOver == true)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        if (!view.IsMine && healthManager.gameOver == true)
+        {
+            Cursor.lockState = CursorLockMode.None;
         }
     }
-      
+
+    void SpellTimer()
+    {
+        SpellReady = false;
+
+        Invoke("SpellTimer2", SpellCooldown2);
+    }
+
+    void SpellTimer2()
+    {
+        SpellReady = true;
+    }
 }

@@ -8,20 +8,65 @@ public class HealthManager : MonoBehaviour
 {
     public int maxHearts = 3;
     private int currentHearts;
-    private int currentHearts2;
     public GameObject gameOver;
     public GameObject Victory;
+    private GameState gameState;
+
+    private GameObject Heart1;
+    private GameObject Heart2;
+    private GameObject Heart3;
 
     private void Start()
     {
         currentHearts = maxHearts;
-        currentHearts2 = maxHearts;
+
+        gameState = FindObjectOfType<GameState>();
 
         GameObject canvasGameObject = GameObject.Find("Canvas");
         if (canvasGameObject != null)
         {
-            // Reference the GameObject in the Canvas
             gameOver = canvasGameObject.transform.Find("gameOverScreen").gameObject;
+            Victory = canvasGameObject.transform.Find("VictoryScreen").gameObject;
+
+            Heart1 = canvasGameObject.transform.Find("Heart 1").gameObject;
+            Heart2 = canvasGameObject.transform.Find("Heart 2").gameObject;
+            Heart3 = canvasGameObject.transform.Find("Heart 3").gameObject;
+        }
+    }
+
+    private void Update()
+    {
+        switch (currentHearts)
+        {
+            case 0:
+                {
+                    Heart1.gameObject.SetActive(false);
+                    Heart2.gameObject.SetActive(false);
+                    Heart3.gameObject.SetActive(false);
+                    break;
+                }
+            case 1:
+                {
+                    Heart1.gameObject.SetActive(true);
+                    Heart2.gameObject.SetActive(false);
+                    Heart3.gameObject.SetActive(false);
+                    break;
+
+                }
+            case 2:
+                {
+                    Heart1.gameObject.SetActive(true);
+                    Heart2.gameObject.SetActive(true);
+                    Heart3.gameObject.SetActive(false);
+                    break;
+                }
+            case 3:
+                {
+                    Heart1.gameObject.SetActive(true);
+                    Heart2.gameObject.SetActive(true);
+                    Heart3.gameObject.SetActive(true);
+                    break;
+                }
         }
     }
 
@@ -32,16 +77,7 @@ public class HealthManager : MonoBehaviour
         if (currentHearts <= 0)
         {
             GameOver();
-        }
-    }
-
-    public void DecreaseHearts2()
-    {
-        currentHearts2--;
-
-        if (currentHearts2 <= 0)
-        {
-            GameOver();
+            gameState.SetGameOverRPC();
         }
     }
 
