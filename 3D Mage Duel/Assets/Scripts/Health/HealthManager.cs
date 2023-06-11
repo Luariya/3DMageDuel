@@ -27,11 +27,11 @@ public class HealthManager : MonoBehaviour
         {
             gameOver = canvasGameObject.transform.Find("gameOverScreen").gameObject;
             Victory = canvasGameObject.transform.Find("VictoryScreen").gameObject;
-
-            Heart1 = canvasGameObject.transform.Find("Heart 1").gameObject;
-            Heart2 = canvasGameObject.transform.Find("Heart 2").gameObject;
-            Heart3 = canvasGameObject.transform.Find("Heart 3").gameObject;
         }
+
+        Heart1 = gameObject.transform.Find("Heart 1").gameObject;
+        Heart2 = gameObject.transform.Find("Heart 2").gameObject;
+        Heart3 = gameObject.transform.Find("Heart 3").gameObject;
     }
 
     private void Update()
@@ -43,6 +43,7 @@ public class HealthManager : MonoBehaviour
                     Heart1.gameObject.SetActive(false);
                     Heart2.gameObject.SetActive(false);
                     Heart3.gameObject.SetActive(false);
+                    Debug.Log("0");
                     break;
                 }
             case 1:
@@ -50,6 +51,7 @@ public class HealthManager : MonoBehaviour
                     Heart1.gameObject.SetActive(true);
                     Heart2.gameObject.SetActive(false);
                     Heart3.gameObject.SetActive(false);
+                    Debug.Log("1");
                     break;
 
                 }
@@ -58,6 +60,7 @@ public class HealthManager : MonoBehaviour
                     Heart1.gameObject.SetActive(true);
                     Heart2.gameObject.SetActive(true);
                     Heart3.gameObject.SetActive(false);
+                    Debug.Log("2");
                     break;
                 }
             case 3:
@@ -65,6 +68,7 @@ public class HealthManager : MonoBehaviour
                     Heart1.gameObject.SetActive(true);
                     Heart2.gameObject.SetActive(true);
                     Heart3.gameObject.SetActive(true);
+                    Debug.Log("3");
                     break;
                 }
         }
