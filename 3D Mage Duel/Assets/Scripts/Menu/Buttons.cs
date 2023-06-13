@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
 public class Buttons : MonoBehaviour
 {
@@ -19,9 +20,20 @@ public class Buttons : MonoBehaviour
 
     public void HomeButton()
     {
+        PhotonView photonView = GetComponent<PhotonView>();
+
+        if (photonView != null && photonView.IsMine)
+        {
+            PhotonNetwork.Disconnect();
+        }
+
+        Invoke("LoadScene", 1f);
         buttonsound.Play();
+    }
+
+    private void LoadScene()
+    {
         SceneManager.LoadScene("StartScreen");
-        
     }
 
     public void CreditScreen()

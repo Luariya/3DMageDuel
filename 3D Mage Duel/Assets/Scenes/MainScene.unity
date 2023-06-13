@@ -481,8 +481,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2005eaf71ec45d54097cfe8199dee1b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  victory: {fileID: 0}
-  gameOver: {fileID: 0}
 --- !u!4 &661759287
 Transform:
   m_ObjectHideFlags: 0
@@ -621,7 +619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f57de27fe4898c947bf01814a258d98a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 3761969613278685289, guid: dbb3162d46b030e4f95cffd7d879831f, type: 3}
+  playerPrefab: {fileID: 7630488568120397753, guid: dbb3162d46b030e4f95cffd7d879831f, type: 3}
   spawnPosition: {fileID: 1788188552}
 --- !u!4 &1129827040
 Transform:
